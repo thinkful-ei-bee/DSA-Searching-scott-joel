@@ -79,7 +79,25 @@ go to center of bookshelf,
 Repeat until bookshelf = .1, return title
 */
 
+/*
+Reconstructed:
+        35
+      /     \
+     25      89
+    /  \    /  \
+  15    27 79   91
+ /  \           /
+14   19        90
+
+1) Given a binary search tree whose in-order and pre-order traversals 
+are respectively:
+in-order: 14 15 19 25 27 35 79 89 90 91 
 
 
-// binarySearch
+and:
+pre-order: 35 25 15 14 19 27 89 79 91 90 
+What would be its postorder traversal?
 
+Post-order: 14, 19, 15, 27, 25, 79, 90, 91, 89, 35
+
+*/
