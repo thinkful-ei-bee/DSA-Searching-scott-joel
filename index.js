@@ -1,0 +1,1 @@
+const bs = require('./binarySearch.js);
