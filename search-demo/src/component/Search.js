@@ -34,6 +34,38 @@ export default class Search extends Component {
     return -1;
   }
 
+  handleBinarySearch = () => {
+    let arr = this.convertList(this.state.list).sort();
+    this.binarySearch(arr, this.state.searchFor);
+  }
+
+  binarySearch = (array, value, start = 0, end = array.length - 1, steps = 1) => {
+
+    if (start > end) return -1;
+    //find the midpoint and the item at the midpoint
+    let index = Math.floor((start + end) / 2);
+    console.log(`start: ${array[start]}, end: ${array[end]}, midpoint: ${array[index]}`)
+    let item = array[index];
+    //if the middle element is the target them return that location
+    if (item === value) {
+        this.setState({ steps: steps, found: true })
+        return;
+    }
+    //if the middle element is less than the target then the target lies 
+    //on the right side so eliminate all left side and only 
+    //consider after the middle to the end of the array
+    else if (item < value) {
+        steps++;
+        return this.binarySearch(array, value, index + 1, end, steps);
+    }
+    //if the middle element is greater than the target then the 
+    //target is on the left side so the left of the middle 
+    else if (item > value) {
+        steps++;
+        return this.binarySearch(array, value, start, index - 1, steps);
+    }
+  }
+
   render() {
 
     return (
@@ -41,6 +73,7 @@ export default class Search extends Component {
         <p>{this.state.list}</p>
         <input onChange={this.handleSearchFor} type="number"></input>
         <button onClick={this.handleLinear}>Linear</button>
+        <button onClick={this.handleBinarySearch}>Binary Search</button>
 
         <br />
 
