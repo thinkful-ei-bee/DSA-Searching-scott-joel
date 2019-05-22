@@ -36,3 +36,50 @@ console.log(binarySearch(list, 16))
 // How many searches: 
 // To find 8: 4 searches
 // To find 16: 3 searches, -1, not found
+
+/* Find a book - Dewey Decimal System
+
+Given this: http://204.38.55.73/dnn6/Portals/0/DeweyDecimalClassificationChart.pdf
+
+And this: 
+500 --- Science:
+500 Science
+510 Mathematics
+520 Astronomy
+530 Physics
+540 Chemistry
+550 Earth sciences & geology
+560 Fossils & prehistoric life
+570 Life sciences; biology
+580 Plants (Botany)
+590 Animals (Zoology)
+
+Imagine you are looking for a book in a library with a 
+Dewey Decimal index. How would you go about it? 
+Can you express this process as a search algorithm? 
+Implement your algorithm to find a book whose 
+Dewey and book title is provided.
+
+input: array of objects representing a library
+output: { "dewey": 510.1, "title": General Algebra } 
+
+binary search by category - 510
+go to center of library, 
+    if number less than 510 book on right
+    if number greater than 510 book on right
+repeat: go to center of results
+    if number less than 510 book on right
+    if number greater than 510 book on right
+Once we arrive at 510 we do another search to the right of the decimal
+go to center of bookshelf, 
+    if .1 on the left bookshelf is values to the left 
+    and start of bookshelf
+    if .1 on the right bookshelf is values to the right 
+    and end of bookshelf
+Repeat until bookshelf = .1, return title
+*/
+
+
+
+// binarySearch
+
