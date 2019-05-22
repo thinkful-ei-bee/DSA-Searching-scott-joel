@@ -1,3 +1,8 @@
+'use strict';
+
+const BinarySearchTree = require('./bst');
+const Queue = require('./queue');
+
 function binarySearch(array, value, start=0, end=array.length-1) {
   if (start > end) return -1;
   //find the midpoint and the item at the midpoint
@@ -6,18 +11,18 @@ function binarySearch(array, value, start=0, end=array.length-1) {
   let item = array[index];
   //if the middle element is the target them return that location
   if (item === value) {
-      return index;
+    return index;
   }
   //if the middle element is less than the target then the target lies 
   //on the right side so eliminate all left side and only 
   //consider after the middle to the end of the array
   else if (item < value) {
-      return binarySearch(array, value, index + 1, end);
+    return binarySearch(array, value, index + 1, end);
   }
   //if the middle element is greater than the target then the 
   //target is on the left side so the left of the middle 
   else if (item > value) {
-      return binarySearch(array, value, start, index - 1);
+    return binarySearch(array, value, start, index - 1);
   }
 };
 
@@ -31,7 +36,7 @@ let list = [3, 5, 6, 8, 11, 12, 14, 15, 17, 18];
 
 
 */
-console.log(binarySearch(list, 16))
+//console.log(binarySearch(list, 16))
 
 // How many searches: 
 // To find 8: 4 searches
@@ -111,3 +116,83 @@ Reconstructed:
   5   7  9   11
 Answer: 8, 6, 5, 7, 10, 9, 11
 */
+
+
+//Implement different tree traversals:
+function preOrder(tree) {
+  console.log(tree.key);
+  if(tree.left) {
+    preOrder(tree.left);
+  }
+  if(tree.right) {
+    preOrder(tree.right);
+  }
+}
+
+function inOrder(tree) {
+  if(tree.left) {
+    inOrder(tree.left);
+  }
+  console.log(tree.key);
+  if(tree.right) {
+    inOrder(tree.right);
+  }
+}
+
+function postOrder(tree) {
+  if(tree.left) {
+    postOrder(tree.left);
+  }
+  if(tree.right) {
+    postOrder(tree.right);
+  }
+  console.log(tree.key);
+}
+
+//Find the next commanding officer
+
+function bfs(tree, values=[]) {
+  const queue = new Queue;
+  queue.enqueue(tree);
+  //console.log('queue:', queue);
+
+  while (queue.first !== null) {
+    const node = queue.dequeue();
+    values.push(node.value);
+
+    if(node.left) {
+      queue.enqueue(node.left);
+    }
+
+    if(node.right) {
+      queue.enqueue(node.right);
+    }
+  }
+
+  return values;
+}
+
+
+
+
+function main() {
+  const BST = new BinarySearchTree;
+
+  const array = [25, 15, 50, 10, 24, 35, 70, 4, 12, 18, 31, 44, 66, 90, 22];
+
+  array.forEach(num => BST.insert(num, num));
+
+  // console.log('pre:');
+  // preOrder(BST);
+  // console.log('in:');
+  // inOrder(BST);
+  // console.log('post:');
+  // postOrder(BST);
+
+
+  console.log('bfs:', bfs(BST));
+
+}
+
+main();
+
